@@ -1,7 +1,7 @@
 SELECT *
 FROM `p3.fuentesmascotas`;
 
--- Standarize date format
+-- Estandarizar fechas
 
 SELECT FECHA_INSTALACION, DATE (FECHA_INSTALACION)
 FROM `p3.fuentesmascotas`
@@ -14,7 +14,7 @@ UPDATE `p3.fuentesmascotas`
 SET fecha_instalacion_converted = DATE (FECHA_INSTALACION)
 WHERE FECHA_INSTALACION <> '' AND FECHA_INSTALACION IS NOT NULL;
 
--- Separate address
+-- Separar dirección
 
 SELECT
     DIRECCION,
@@ -41,6 +41,8 @@ SET direccion_nombre = TRIM(SUBSTRING(SUBSTRING_INDEX(DIRECCION, ',', 1), LENGTH
 UPDATE `p3.fuentesmascotas`
 SET direccion_numero = TRIM(SUBSTRING_INDEX(DIRECCION, ',', -1))
 
+-- Categorizar fuentes aptas para el concumo humano
+	
 SELECT USO,
 CASE WHEN 
 	USO LIKE '%personas%' THEN 'Sí'
